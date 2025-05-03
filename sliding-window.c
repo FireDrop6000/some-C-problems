@@ -31,7 +31,7 @@ int main(void) {
   buf = malloc(sizeof(char) * bufsize);
   if (buf == NULL) {
     perror("Out of memory :(");
-    exit(1);
+    return EXIT_FAILURE;
   }
   printf("Enter array size\n");
   getline(&buf, &bufsize, stdin);
@@ -45,7 +45,7 @@ int main(void) {
   getline(&buf, &bufsize, stdin);
   char *token = strtok(buf, ",");
 
-  int arr[n];
+  int *arr = malloc(n * sizeof(int));
   int size = 0;
   while (token != NULL && size < n) {
     // Initialize array with each integer
@@ -55,5 +55,6 @@ int main(void) {
 
   printf("Max window sum: %d", windowSum(arr, k));
   free(buf);
+  free(arr);
   return EXIT_SUCCESS;
 }
